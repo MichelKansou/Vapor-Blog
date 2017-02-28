@@ -1,0 +1,19 @@
+#extend("base")
+
+#export("head") {
+	<title>My App</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
+	<link rel="stylesheet" href="/styles/app.css">
+}
+
+#export("body") {
+    <div class="list-container">
+        <h1>Users Page</h1>
+        #if(users) {
+            <ul>
+                #loop(users, "user") { <li>#(user.username)</li> }
+            </ul>
+        }
+    </div>
+}
