@@ -49,3 +49,17 @@ body {
     display: inline-block;
     float: left;
 }
+.container {
+	text-align: center;
+}
+.field {
+    margin-bottom: 1em;
+}
+.btn {
+	color: white;
+	border: none;
+	text-decoration: none;
+	padding: 10px;
+	font-size: 18px;
+	background-color: #313131;
+}
