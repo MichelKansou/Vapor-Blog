@@ -9,7 +9,7 @@ final class UserController: ResourceRepresentable {
         ])
     }
 
-    func show(_ request: Request, user: User)throws -> ResponseRepresentable {
+    func show(_ request: Request, user: User) throws -> ResponseRepresentable {
         return try drop.view.make("User/show", [
             "user": user
         ])

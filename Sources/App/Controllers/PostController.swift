@@ -4,19 +4,17 @@ import HTTP
 final class PostController: ResourceRepresentable {
     func index(request: Request) throws -> ResponseRepresentable {
         let posts = try Post.all().makeNode().converted(to: JSON.self)
-        log.info("a nice information")
         return try drop.view.make("Post/index", [
             "posts": posts
         ])
     }
 
     func store(request: Request) throws -> ResponseRepresentable {
-        log.info("post create")
-        var post = try request.post()
+        guard let title = request.data["title"]?.string, let content = request.data["content"]?.string else { throw Abort.badRequest }
+        var post = Post(title: title, content: content)
         try post.save()
-        log.info("post saved")
-        // guard let id = post.id!.int else { throw Abort.badRequest }
-        return Response(redirect: "/posts")
+        guard let id = post.id!.int else { throw Abort.badRequest }
+        return Response(redirect: "/posts/\(id)")
     }
 
     func show(request: Request, post: Post) throws -> ResponseRepresentable {
@@ -27,15 +25,17 @@ final class PostController: ResourceRepresentable {
 
     func delete(request: Request, post: Post) throws -> ResponseRepresentable {
         try post.delete()
-        return JSON([:])
+        return Response(redirect: "/posts")
     }
 
     func update(request: Request, post: Post) throws -> ResponseRepresentable {
-        let new = try request.post()
+        guard let title = request.data["title"]?.string, let content = request.data["content"]?.string else { throw Abort.badRequest }
         var post = post
-        post.content = new.content
+        post.title = title
+        post.content = content
         try post.save()
-        return post
+        guard let id = post.id!.int else { throw Abort.badRequest }
+        return Response(redirect: "/posts/\(id)")
     }
 
     func makeResource() -> Resource<Post> {

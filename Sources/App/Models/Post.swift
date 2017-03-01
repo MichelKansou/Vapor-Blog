@@ -9,7 +9,7 @@ final class Post: Model {
     var title: String
     var content: String
 
-    init(content: String, title: String) {
+    init(title: String, content: String) {
         self.id = nil
         self.title = title
         self.content = content
@@ -27,16 +27,6 @@ final class Post: Model {
             "title": title,
             "content": content
         ])
-    }
-}
-
-extension Post {
-    /**
-        This will automatically fetch from database, using example here to load
-        automatically for example. Remove on real models.
-    */
-    public convenience init?(from string: String) throws {
-        self.init(content: string, title: string)
     }
 }
 
