@@ -3,27 +3,31 @@ import HTTP
 
 final class PostController: ResourceRepresentable {
     func index(request: Request) throws -> ResponseRepresentable {
-        return try Post.all().makeNode().converted(to: JSON.self)
+        let posts = try Post.all().makeNode().converted(to: JSON.self)
+        log.info("a nice information")
+        return try drop.view.make("Post/index", [
+            "posts": posts
+        ])
     }
 
-    func create(request: Request) throws -> ResponseRepresentable {
+    func store(request: Request) throws -> ResponseRepresentable {
+        log.info("post create")
         var post = try request.post()
         try post.save()
-        return post
+        log.info("post saved")
+        // guard let id = post.id!.int else { throw Abort.badRequest }
+        return Response(redirect: "/posts")
     }
 
     func show(request: Request, post: Post) throws -> ResponseRepresentable {
-        return post
+        return try drop.view.make("Post/show", [
+            "post": post
+        ])
     }
 
     func delete(request: Request, post: Post) throws -> ResponseRepresentable {
         try post.delete()
         return JSON([:])
-    }
-
-    func clear(request: Request) throws -> ResponseRepresentable {
-        try Post.query().delete()
-        return JSON([])
     }
 
     func update(request: Request, post: Post) throws -> ResponseRepresentable {
@@ -34,20 +38,13 @@ final class PostController: ResourceRepresentable {
         return post
     }
 
-    func replace(request: Request, post: Post) throws -> ResponseRepresentable {
-        try post.delete()
-        return try create(request: request)
-    }
-
     func makeResource() -> Resource<Post> {
         return Resource(
             index: index,
-            store: create,
+            store: store,
             show: show,
-            replace: replace,
             modify: update,
-            destroy: delete,
-            clear: clear
+            destroy: delete
         )
     }
 }
