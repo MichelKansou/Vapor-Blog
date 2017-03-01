@@ -14,8 +14,18 @@ import Turnstile
 final class AuthController {
 
     func addRoutes(to drop: Droplet) {
+        drop.get("login", handler: loginView)
+        drop.get("register", handler: registerView)
         drop.post("login", handler: login)
         drop.post("register", handler: register)
+    }
+
+    func loginView(request: Request) throws -> ResponseRepresentable {
+        return try drop.view.make("Auth/login")
+    }
+
+    func registerView(request: Request) throws -> ResponseRepresentable {
+        return try drop.view.make("Auth/register")
     }
 
     func register(_ request: Request)throws -> ResponseRepresentable {
@@ -45,7 +55,7 @@ final class AuthController {
         let credentials = UsernamePassword(username: username, password: password)
         do {
             try request.auth.login(credentials, persist: true)
-            return Response(redirect: "admin/new-post")
+            return Response(redirect: "admin/posts")
         } catch {
             return Response(redirect: "login?succeded=false")
         }

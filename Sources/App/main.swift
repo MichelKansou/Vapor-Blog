@@ -25,19 +25,11 @@ let authController = AuthController()
 authController.addRoutes(to: drop)
 
 drop.get { req in
+    let posts = try Post.all().makeNode().converted(to: JSON.self)
 
-    return try drop.view.make("home")
-
-}
-
-drop.get("login") { req in
-
-    return try drop.view.make("Auth/login")
-}
-
-drop.get("register") { req in
-
-    return try drop.view.make("Auth/register")
+    return try drop.view.make("home", [
+        "posts": posts
+    ])
 }
 
 drop.resource("posts", PostController())
