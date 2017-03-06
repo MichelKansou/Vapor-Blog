@@ -9,7 +9,7 @@ final class UserController: ResourceRepresentable {
         ])
     }
 
-    func show(_ request: Request, user: User) throws -> ResponseRepresentable {
+    func show(request: Request, user: User) throws -> ResponseRepresentable {
         return try drop.view.make("User/show", [
             "user": user
         ])
@@ -20,12 +20,5 @@ final class UserController: ResourceRepresentable {
             index: index,
             show: show
         )
-    }
-}
-
-extension Request {
-    func user() throws -> User {
-        guard let json = json else { throw Abort.badRequest }
-        return try User(node: json)
     }
 }

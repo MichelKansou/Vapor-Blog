@@ -18,6 +18,7 @@ final class AuthController {
         drop.get("register", handler: registerView)
         drop.post("login", handler: login)
         drop.post("register", handler: register)
+        drop.post("logout", handler: logout)
     }
 
     func loginView(request: Request) throws -> ResponseRepresentable {
@@ -28,7 +29,7 @@ final class AuthController {
         return try drop.view.make("Auth/register")
     }
 
-    func register(_ request: Request)throws -> ResponseRepresentable {
+    func register(request: Request)throws -> ResponseRepresentable {
         guard let username = request.data["username"]?.string,
         let password = request.data["password"]?.string else {
             throw Abort.badRequest
@@ -46,20 +47,62 @@ final class AuthController {
         }
     }
 
-    func login(_ request: Request) throws -> ResponseRepresentable {
+    func login(request: Request) throws -> ResponseRepresentable {
         guard let username = request.data["username"]?.string,
             let password = request.data["password"]?.string else {
-                throw Abort.badRequest
+            throw Abort.custom(status: Status.badRequest, message: "Missing username or password")
         }
 
         let credentials = UsernamePassword(username: username, password: password)
+
         do {
-            try request.auth.login(credentials, persist: true)
-            return Response(redirect: "admin/posts")
+            try request.auth.login(credentials)
+            return Response(redirect: "/admin/posts")
         } catch {
-            return Response(redirect: "login?succeded=false")
+            throw Abort.custom(status: Status.badRequest, message: "Invalid email or password")
         }
     }
 
+    func logout(request: Request) throws -> ResponseRepresentable {
+        // Invalidate the current access token
+        log.info("logout")
+        var user = try request.user()
+        log.info("username: \(user.username)")
+        user.token = nil
+        try user.save()
 
+        // Clear the session
+        request.subject.logout()
+        return Response(redirect: "/")
+    }
+
+    func validateAccessToken(request: Request) throws -> ResponseRepresentable {
+        var user = try request.user()
+        guard let _ = user.token else {
+            throw Abort.badRequest
+        }
+
+        // Check if the token is expired, or invalid and generate a new one
+        if try user.validateToken() {
+            try user.save()
+        }
+
+        return try JSON(node: ["success": true])
+    }
+
+
+}
+
+extension Request {
+    // Helper method to get the current user
+    func user() throws -> User {
+        guard let user = try auth.user() as? User else {
+            throw UnsupportedCredentialsError()
+        }
+        return user
+    }
+    // Exposes the Turnstile subject, as Vapor has a facade on it.
+    var subject: Subject {
+        return storage["subject"] as! Subject
+    }
 }
