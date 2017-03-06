@@ -3,6 +3,8 @@ import Vapor
 import VaporMySQL
 import SwiftyBeaverVapor
 import SwiftyBeaver
+import Auth
+import Cookies
 
 let drop = Droplet()
 
@@ -10,6 +12,8 @@ try drop.addProvider(VaporMySQL.Provider.self)
 
 drop.preparations.append(User.self)
 drop.preparations.append(Post.self)
+
+drop.middleware.append(AuthMiddleware(user: User.self))
 
 // Log config with SwiftyBeaver
 let console = ConsoleDestination()  // log to Xcode Console in color
@@ -31,11 +35,16 @@ drop.get { req in
         "posts": posts
     ])
 }
+let protect = ProtectMiddleware(error: Abort.custom(status: .unauthorized, message: "Unauthorized"))
+    
+drop.grouped(CheckUser(), protect).group("admin") { admin in
 
-drop.resource("posts", PostController())
-drop.get("posts/create") { req in
-    return try drop.view.make("Post/create")
+    admin.resource("posts", PostController())
+    admin.get("posts/create") { req in
+        return try drop.view.make("Post/create")
+    }
+    admin.resource("users", UserController())
 }
-drop.resource("users", UserController())
+
 
 drop.run()
