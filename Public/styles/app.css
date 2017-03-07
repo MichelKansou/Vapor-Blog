@@ -10,7 +10,8 @@ body, html {
 
 body {
 	font-family: sans-serif;
-	color: #333;
+	color: #313131;
+    background-color: #ecf0f1;
 	position: relative;
 }
 
@@ -20,7 +21,57 @@ body {
     margin-right: 12px;
     float: left;
 }
+a {
+    color: #ecf0f1;
+    text-decoration: none;
+}
+header {
+	background-color: #2F79C3;
+	color: white;
+	text-align: center;
+	padding: 1.5em;
+	font-size: 1.5rem;
+}
+main {
+	min-height: 500px;
+	padding: 5em 3em;
+	justify-content: center;
+	display: flex;
+	align-content: center;
+}
 
+.posts-container {
+	border-radius: 5px;
+    display: flex;
+    width: 100%;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.posts-container > article.post:last-child {
+	border-bottom: none;
+}
+
+article.post {
+	padding: 1em;
+    text-align: center;
+    border-bottom: 1px solid;
+    border-color: #768A92;
+}
+
+footer {
+    background-color: #374047;
+    color: white;
+    padding: 1em;
+}
+
+footer > ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    align-content: center;
+}
 .message {
 	position: absolute;
 	width: 256px;
