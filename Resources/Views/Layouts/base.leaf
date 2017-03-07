@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    #import("head")
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/app.css">
+</head>
+    <body>
+        <header>
+            <nav>
+                Blog Title
+            </nav>
+        </header>
+        <main>
+            #import("body")
+        </main>
+        <footer>
+            <ul>
+                <li>Contact</li>
+                <li>Github</li>
+            </ul>
+            <p>Running on <a href="https://vapor.codes">Vapor</a></p>
+            <p id="copyright">by Michel Kansou. ©  2017 All rights reserved.</p>
+        </footer>
+    </body>
+</html>

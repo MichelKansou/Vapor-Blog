@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    #import("head")
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/app.css">
+</head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="posts">Posts</a></li>
+                    <li>
+                        <form action="/logout" method="POST">
+                            <button class="btn" type="submit">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            #import("body")
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
