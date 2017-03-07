@@ -36,12 +36,14 @@ drop.get { req in
     ])
 }
 let protect = ProtectMiddleware(error: Abort.custom(status: .unauthorized, message: "Unauthorized"))
-    
+
 drop.grouped(CheckUser(), protect).group("admin") { admin in
 
     admin.resource("posts", PostController())
     admin.get("posts/create") { req in
-        return try drop.view.make("Post/create")
+        return try drop.view.make("Admin/Post/create", [
+            "request": req
+        ])
     }
     admin.resource("users", UserController())
 }
