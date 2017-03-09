@@ -1,4 +1,5 @@
 import Foundation
+import Fluent
 import Vapor
 import VaporMySQL
 import SwiftyBeaverVapor
@@ -29,7 +30,7 @@ let authController = AuthController()
 authController.addRoutes(to: drop)
 
 drop.get { req in
-    let posts = try Post.all().makeNode().converted(to: JSON.self)
+    let posts = try JSON(node: Post.query().sort("created_at", Sort.Direction.descending).all().makeNode())
 
     return try drop.view.make("home", [
         "posts": posts

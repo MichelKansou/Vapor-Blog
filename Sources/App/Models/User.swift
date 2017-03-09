@@ -71,6 +71,12 @@ extension User: Preparation {
             user.string("password")
             user.string("token", optional: true)
         })
+
+        let seedData: [User] = [
+            User(username: "admin", password: "password")
+        ]
+
+        try database.seed(seedData)
     }
 
     static func revert(_ database: Database) throws {

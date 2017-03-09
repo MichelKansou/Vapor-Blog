@@ -41,7 +41,7 @@ final class AuthController {
         if user != nil {
             try user!.save()
             guard let id = user!.id!.int else { throw Abort.badRequest }
-            return Response(redirect: "/users/\(id)")
+            return Response(redirect: "/login")
         } else {
             return Response(redirect: "/register")
         }

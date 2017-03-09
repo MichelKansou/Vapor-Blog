@@ -9,9 +9,12 @@ final class Post: Model {
     var content: String
     var image: String?
     var url: String?
-    var created_at: Int
-    var updated_at: Int
+    var created_at: Date
 
+
+    enum Error: Swift.Error {
+        case dateNotSupported
+    }
 
     init(title: String, content: String, image: String?, url: String?) {
         self.id = nil
@@ -19,8 +22,7 @@ final class Post: Model {
         self.content = content
         self.image = image
         self.url = url
-        self.created_at = Int(Date().timeIntervalSince1970)
-        self.updated_at = Int(Date().timeIntervalSince1970)
+        self.created_at = Date()
     }
 
     init(node: Node, in context: Context) throws {
@@ -29,8 +31,20 @@ final class Post: Model {
         content = try node.extract("content")
         image = try node.extract("image")
         url = try node.extract("url")
-        created_at = try node.extract("created_at")
-        updated_at = try node.extract("updated_at")
+        if let unix = node["created_at"]?.double {
+            // allow unix timestamps (easy to send this format from Paw)
+            created_at = Date(timeIntervalSince1970: unix)
+        } else if let raw = node["created_at"]?.string {
+            // if it's a string we assume it's in mysql date format
+            // this could be expanded to support many formats
+            guard let created_at = dateFormatter.date(from: raw) else {
+                throw Error.dateNotSupported
+            }
+
+            self.created_at = created_at
+        } else {
+            throw Error.dateNotSupported
+        }
     }
 
     func makeNode(context: Context) throws -> Node {
@@ -40,8 +54,7 @@ final class Post: Model {
             "content": content,
             "image": image,
             "url": url,
-            "created_at": Post.timestampsToString(created_at),
-            "updated_at": Post.timestampsToString(updated_at)
+            "created_at": dateFormatter.string(from: created_at)
         ])
     }
 }
@@ -54,9 +67,19 @@ extension Post: Preparation {
             post.string("content")
             post.string("image", optional: true)
             post.string("url", optional: true)
-            post.int("created_at")
-            post.int("updated_at")
+            post.datetime("created_at")
         })
+
+        let seedData: [Post] = [
+            Post(
+                title: "Welcome",
+                content: "This is your first post :D",
+                image: "https://ih0.redbubble.net/image.38248118.7630/flat,800x800,070,f.u1.jpg",
+                url: "https://www.youtube.com/watch?v=LQ1SbHLXlH8"
+            )
+        ]
+
+        try database.seed(seedData)
     }
 
     static func revert(_ database: Database) throws {
@@ -64,13 +87,14 @@ extension Post: Preparation {
     }
 }
 
-extension Post {
-    static func timestampsToString(_ timestamps: Int) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(timestamps))
-        let dateformatter = DateFormatter()
-        dateformatter.timeZone = TimeZone(identifier: "France/Paris")
-        dateformatter.dateFormat = "dd-MM-yyyy"
-        let val = dateformatter.string(from: date)
-        return val
+private var _df: DateFormatter?
+private var dateFormatter: DateFormatter {
+    if let df = _df {
+        return df
     }
+
+    let df = DateFormatter()
+    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    _df = df
+    return df
 }

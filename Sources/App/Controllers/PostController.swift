@@ -1,9 +1,11 @@
 import Vapor
+import Fluent
 import HTTP
 
 final class PostController: ResourceRepresentable {
     func index(request: Request) throws -> ResponseRepresentable {
-        let posts = try Post.all().makeNode().converted(to: JSON.self)
+        let posts = try JSON(node: Post.query().sort("created_at", Sort.Direction.descending).all().makeNode())
+
         return try drop.view.make("Admin/Post/index", [
             "posts": posts
         ])
