@@ -7,7 +7,7 @@
 #export("body") {
     <div class="container">
         <h1>Create Post Page</h1>
-            <form action="/admin/posts" method="POST">
+            <form action="/admin/posts" method="POST" enctype="multipart/form-data">
                 <div class="field">
                     <label><b>Title</b></label>
                     <input type="text" placeholder="Title" name="title" required>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="field">
                     <label><b>Image</b></label>
-                    <input type="text" placeholder="Image" name="image" required>
+                    <input type="file" name="image" required>
                 </div>
                 <div class="field">
                     <label><b>Url</b></label>

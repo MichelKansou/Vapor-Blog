@@ -65,7 +65,7 @@ extension Post: Preparation {
             post.id()
             post.string("title")
             post.string("content")
-            post.string("image", optional: true)
+            post.longText("image", optional: true)
             post.string("url", optional: true)
             post.datetime("created_at")
         })
@@ -74,7 +74,7 @@ extension Post: Preparation {
             Post(
                 title: "Welcome",
                 content: "This is your first post :D",
-                image: "https://ih0.redbubble.net/image.38248118.7630/flat,800x800,070,f.u1.jpg",
+                image: "",
                 url: "https://www.youtube.com/watch?v=LQ1SbHLXlH8"
             )
         ]

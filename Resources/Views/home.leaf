@@ -10,7 +10,11 @@
             #loop(posts, "post") {
                 <article class="post">
 					<h2 class="title">#(post.title)</h2>
-					<a class="image" href="#(post.url)"><img src="#(post.image)" alt="post-image"></a>
+					#if(post.image) {
+						<a class="image" href="#(post.url)"><img src="data:image/jpeg;base64,#(post.image)" alt="post-image"></a>
+					} ##else() {
+						<a class="image" href="#(post.url)"><img src="/images/default-post-image.png" alt="post-image"></a>
+					}
                     <p class="content">#(post.content)</p>
 					<p class="date">#(post.created_at)</p>
                 </article>

@@ -1,5 +1,6 @@
 import Vapor
 import Fluent
+import Foundation
 import HTTP
 
 final class PostController: ResourceRepresentable {
@@ -13,11 +14,11 @@ final class PostController: ResourceRepresentable {
 
     func store(request: Request) throws -> ResponseRepresentable {
         guard let title = request.data["title"]?.string, let content = request.data["content"]?.string,
-        let image = request.data["image"]?.string, let url = request.data["url"]?.string else { throw Abort.badRequest }
-        var post = Post(title: title, content: content, image: image, url: url)
+        let image = request.multipart?["image"]?.file, let url = request.data["url"]?.string else { throw Abort.badRequest }
+        var post = Post(title: title, content: content, image: encodeImageToBase64(bytes: image.data), url: url)
         try post.save()
-        guard let id = post.id!.int else { throw Abort.badRequest }
-        return Response(redirect: "posts/\(id)")
+        // guard let id = post.id!.int else { throw Abort.badRequest }
+        return Response(redirect: "posts/")
     }
 
     func show(request: Request, post: Post) throws -> ResponseRepresentable {
@@ -50,6 +51,14 @@ final class PostController: ResourceRepresentable {
             modify: update,
             destroy: delete
         )
+    }
+
+    func encodeImageToBase64(bytes: [UInt8]) -> String {
+        //convert bytes to data
+        let data = Data(bytes: bytes, count: bytes.count)
+        //convert data to base64
+        let strBase64 = data.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+        return strBase64
     }
 }
 
