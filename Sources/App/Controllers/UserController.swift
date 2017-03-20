@@ -5,13 +5,15 @@ final class UserController: ResourceRepresentable {
     func index(request: Request) throws -> ResponseRepresentable {
         let users = try User.all().makeNode().converted(to: JSON.self)
         return try drop.view.make("User/index", [
-            "users" : users
+            "users" : users,
+            "usersPage": true
         ])
     }
 
     func show(request: Request, user: User) throws -> ResponseRepresentable {
         return try drop.view.make("User/show", [
-            "user": user
+            "user": user,
+            "usersPage": true
         ])
     }
 

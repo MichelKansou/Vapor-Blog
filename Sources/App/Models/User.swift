@@ -72,6 +72,7 @@ extension User: Preparation {
             user.string("token", optional: true)
         })
 
+        // Create new user
         let seedData: [User] = [
             User(username: "admin", password: "password")
         ]

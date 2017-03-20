@@ -29,11 +29,12 @@ let log = drop.log.self
 let authController = AuthController()
 authController.addRoutes(to: drop)
 
-drop.get { req in
+drop.get("/") { req in
     let posts = try JSON(node: Post.query().sort("created_at", Sort.Direction.descending).all().makeNode())
 
     return try drop.view.make("home", [
-        "posts": posts
+        "posts": posts,
+        "homePage": true
     ])
 }
 let protect = ProtectMiddleware(error: Abort.custom(status: .unauthorized, message: "Unauthorized"))

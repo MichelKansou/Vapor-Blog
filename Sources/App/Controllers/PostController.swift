@@ -8,7 +8,8 @@ final class PostController: ResourceRepresentable {
         let posts = try JSON(node: Post.query().sort("created_at", Sort.Direction.descending).all().makeNode())
 
         return try drop.view.make("Admin/Post/index", [
-            "posts": posts
+            "posts": posts,
+            "postsPage": true
         ])
     }
 
@@ -23,7 +24,8 @@ final class PostController: ResourceRepresentable {
 
     func show(request: Request, post: Post) throws -> ResponseRepresentable {
         return try drop.view.make("Admin/Post/show", [
-            "post": post
+            "post": post,
+            "postsPage": true
         ])
     }
 

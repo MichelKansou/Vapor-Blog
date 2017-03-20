@@ -70,6 +70,7 @@ extension Post: Preparation {
             post.datetime("created_at")
         })
 
+        // Create first post
         let seedData: [Post] = [
             Post(
                 title: "Welcome",
@@ -87,14 +88,15 @@ extension Post: Preparation {
     }
 }
 
+// Change date Format
 private var _df: DateFormatter?
 private var dateFormatter: DateFormatter {
-    if let df = _df {
-        return df
+    if let date = _df {
+        return date
     }
 
-    let df = DateFormatter()
-    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    _df = df
-    return df
+    let date = DateFormatter()
+    date.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    _df = date
+    return date
 }

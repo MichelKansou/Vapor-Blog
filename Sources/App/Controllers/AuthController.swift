@@ -15,18 +15,12 @@ final class AuthController {
 
     func addRoutes(to drop: Droplet) {
         drop.get("login", handler: loginView)
-        drop.get("register", handler: registerView)
         drop.post("login", handler: login)
-        drop.post("register", handler: register)
         drop.post("logout", handler: logout)
     }
 
     func loginView(request: Request) throws -> ResponseRepresentable {
         return try drop.view.make("Auth/login")
-    }
-
-    func registerView(request: Request) throws -> ResponseRepresentable {
-        return try drop.view.make("Auth/register")
     }
 
     func register(request: Request)throws -> ResponseRepresentable {
