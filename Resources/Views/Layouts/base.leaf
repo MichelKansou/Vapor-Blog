@@ -4,10 +4,17 @@
     #import("head")
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
     <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
 </head>
     <body>
         <header>
             <a class="blog-logo" href="/"><img src="images/blog-logo.png" alt="blog-logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="/" class="nav-item #if(homePage) {active}">Home</a></li>
+                    <li><a href="/about" class="nav-item #if(aboutPage) {active}">About</a></li>
+                </ul>
+            </nav>
         </header>
         <main>
             #import("body")
@@ -18,7 +25,7 @@
                 <li>Github</li>
             </ul>
             <p>Running on <a href="https://vapor.codes">Vapor</a></p>
-            <p id="copyright">by Michel Kansou. ©  2017 All rights reserved.</p>
+            <p id="copyright"><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="http://michelkansou.github.io/">Michel Kansou.</a> ©  2017 All rights reserved.</p>
         </footer>
     </body>
 </html>

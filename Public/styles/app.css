@@ -31,11 +31,37 @@ header {
 	text-align: center;
 	padding: 0.5em;
 	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+header.admin {
+	justify-content: space-between;
+}
+header > .blog-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    margin-right: 1em;
 }
 
 header > .blog-logo > img {
-	max-width: 100px;
+	max-width: 50px;
 }
+
+header > nav > ul {
+	list-style: none;
+	display: flex;
+    align-items: center;
+	margin: 0;
+	padding: 0;
+}
+
+header > nav > ul > li {
+	margin: 0 .5em;
+	font-size: 1.2rem;
+}
+
 
 main {
 	min-height: 500px;
@@ -43,6 +69,7 @@ main {
 	justify-content: center;
 	display: flex;
 	align-content: center;
+    flex-direction: column;
 }
 
 .posts-container {
@@ -134,7 +161,14 @@ footer > ul {
 	color: white;
 	border: none;
 	text-decoration: none;
+	cursor: pointer;
 	padding: 10px;
 	font-size: 18px;
 	background-color: #313131;
+}
+
+.btn.logout {
+	border-radius: 50%;
+	background-color: white;
+	color: grey;
 }

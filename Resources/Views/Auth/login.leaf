@@ -17,7 +17,6 @@
                 <input type="password" placeholder="Enter Password" name="password" required>
             </div>
             <button class="btn" type="submit">Login</button>
-            <a class="btn" href="/register">Register</a>
         </form>
 </div>
 }

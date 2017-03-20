@@ -4,26 +4,24 @@
     #import("head")
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
     <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
 </head>
     <body>
-        <header>
+        <header class="admin">
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="posts">Posts</a></li>
-                    <li>
-                        <form action="/logout" method="POST">
-                            <button class="btn" type="submit">Logout</button>
-                        </form>
-                    </li>
+                    <li><a href="/" class="nav-item #if(homePage) {active}">Home</a></li>
+                    <li><a href="posts #if(postPage) {active}">Posts</a></li>
                 </ul>
             </nav>
+            <div class="logout">
+                <form action="/logout" method="POST">
+                    <button class="btn logout" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </form>
+            </div>
         </header>
         <main>
             #import("body")
         </main>
-        <footer>
-
-        </footer>
     </body>
 </html>
