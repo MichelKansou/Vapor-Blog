@@ -1,22 +1,30 @@
-#extend("Layouts/base")
-
-#export("head") {
-    <title>My App</title>
-}
-
-#export("body") {
-<div class="container">
-    <h1>Login</h1>
-        <form action="/login" method="POST">
-            <div class="field">
-                <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
+<!DOCTYPE html>
+<html>
+<head>
+    #import("head")
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
+</head>
+    <body>
+        <main class="login">
+            <i class="fa fa-home fa-5x" aria-hidden="true" style="
+                color: white;
+                text-align: center;
+                font-size: 8rem;
+                margin-bottom: .3em;
+            "></i>
+            <div class="form-container">
+                <form id="authForm" action="/login" method="POST">
+                    <div class="field">
+                        <span class="input-icon"><i class="fa fa-user" aria-hidden="true"></i></span><input type="text" placeholder="Username" name="username" required>
+                    </div>
+                    <div class="field">
+                        <span class="input-icon"><i class="fa fa-lock" aria-hidden="true"></i></span><input type="password" placeholder="Password" name="password" required>
+                    </div>
+                </form>
+                <input class="btn" type="submit" form="authForm" value="Login"/>
             </div>
-            <div class="field">
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-            </div>
-            <button class="btn" type="submit">Login</button>
-        </form>
-</div>
-}
+        </main>
+    </body>
+</html>

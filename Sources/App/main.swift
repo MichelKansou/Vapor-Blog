@@ -37,6 +37,13 @@ drop.get("/") { req in
         "homePage": true
     ])
 }
+
+drop.get("about") { req in
+    return try drop.view.make("about", [
+        "aboutPage": true
+    ])
+}
+
 let protect = ProtectMiddleware(error: Abort.custom(status: .unauthorized, message: "Unauthorized"))
 
 drop.grouped(CheckUser(), protect).group("admin") { admin in

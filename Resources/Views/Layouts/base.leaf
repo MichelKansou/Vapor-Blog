@@ -20,12 +20,16 @@
             #import("body")
         </main>
         <footer>
-            <ul>
-                <li>Contact</li>
-                <li>Github</li>
-            </ul>
-            <p>Running on <a href="https://vapor.codes">Vapor</a></p>
-            <p id="copyright"><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="http://michelkansou.github.io/">Michel Kansou.</a> ©  2017 All rights reserved.</p>
+            <div class="footer-container">
+                <ul class="items">
+                    <li>Contact</li>
+                    <li><a href="https://github.com/MichelKansou">Github</a></li>
+                </ul>
+                <div class="block">
+                    <p>Running on <a href="https://vapor.codes">Vapor</a></p>
+                    <p id="copyright"><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="http://michelkansou.github.io/">Michel Kansou.</a> ©  2017 All rights reserved.</p>
+                </div>
+            </div>
         </footer>
     </body>
 </html>

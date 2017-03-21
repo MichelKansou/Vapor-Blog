@@ -1,0 +1,11 @@
+#extend("Layouts/base")
+
+#export("head") {
+	<title>My App - About</title>
+}
+
+#export("body") {
+    <div class="about-container">
+		This is about page
+    </div>
+}
