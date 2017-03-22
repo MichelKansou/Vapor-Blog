@@ -1,0 +1,43 @@
+header {
+	background-color: #2F79C3;
+	color: white;
+	text-align: center;
+	padding: 0 0.5em;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+    .admin {
+        justify-content: space-between;
+    }
+    .blog-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1em;
+        img {
+            max-width: 50px;
+        }
+    }
+    nav {
+        ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            li {
+                display: inherit;
+                a {
+                    padding: 1em;
+                    font-size: 1.2rem;
+                    &:hover {
+                        background-color: #4086cc;
+                    }
+                    &.active {
+                        background-color: #4086cc;
+                    }
+                }
+            }
+        }
+    }
+}

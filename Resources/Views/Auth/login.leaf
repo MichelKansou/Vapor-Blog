@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
 </head>
     <body>
-        <main class="login">
+        <main class="login-container">
             <i class="fa fa-home fa-5x" aria-hidden="true" style="
                 color: white;
                 text-align: center;

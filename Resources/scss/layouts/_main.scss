@@ -1,0 +1,13 @@
+main {
+	min-height: 500px;
+	padding: 5em 3em;
+	justify-content: center;
+	display: flex;
+	align-content: center;
+    flex-direction: column;
+    .login{
+        min-height: 100%;
+        padding: 0;
+        background-color: #313131;
+    }
+}
