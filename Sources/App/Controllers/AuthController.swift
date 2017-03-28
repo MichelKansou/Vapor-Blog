@@ -70,21 +70,6 @@ final class AuthController {
         return Response(redirect: "/")
     }
 
-    func validateAccessToken(request: Request) throws -> ResponseRepresentable {
-        var user = try request.user()
-        guard let _ = user.token else {
-            throw Abort.badRequest
-        }
-
-        // Check if the token is expired, or invalid and generate a new one
-        if try user.validateToken() {
-            try user.save()
-        }
-
-        return try JSON(node: ["success": true])
-    }
-
-
 }
 
 extension Request {
