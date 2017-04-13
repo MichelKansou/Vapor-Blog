@@ -1,13 +1,24 @@
 #extend("Layouts/admin")
 
 #export("head") {
-	<title>My App</title>
+	<title>User | Edit</title>
 }
 
 #export("body") {
-    <div class="list-container">
+    <div class="container">
         #if(user) {
-            <h1>Hello #(user.username) :D</h1>
-        }
+            <h1>Edit</h1>
+            <form id="userForm" action="/admin/users/#(user.id)/update" method="POST">
+                <div class="field">
+                    <label><b>Username</b></label>
+                    <input type="text" placeholder="Username" name="username" value="#(user.username)" required>
+                </div>
+				<div class="field">
+					<label><b>Password</b></label>
+					<input type="password" placeholder="Password" name="password" required>
+				</div>
+				<button class="btn" type="submit">Save</button>
+            </form>
+            }
     </div>
 }

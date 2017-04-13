@@ -47,7 +47,7 @@ let protect = ProtectMiddleware(error: Abort.custom(status: .unauthorized, messa
 drop.grouped(CheckUser(), protect).group("admin") { admin in
 
     let userController = UserController()
-    // userController.addRoutes(to: drop)
+    userController.addRoutes(to: drop)
     admin.resource("posts", PostController())
     admin.get("posts/create") { req in
         return try drop.view.make("Admin/Post/create", [
@@ -55,6 +55,15 @@ drop.grouped(CheckUser(), protect).group("admin") { admin in
         ])
     }
     admin.resource("users", userController)
+
+    admin.get("my-profile") { req in
+        guard let authUser = try req.user() as? User else {
+            print("unable to get authenticated user")
+        }
+        return try drop.view.make("Admin/User/show", [
+            "user": authUser
+        ])
+    }
 }
 
 

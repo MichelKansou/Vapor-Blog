@@ -14,10 +14,16 @@
                     <li><a href="posts #if(postPage) {active}">Posts</a></li>
                 </ul>
             </nav>
-            <div class="logout">
-                <form action="/logout" method="POST">
-                    <button class="btn logout" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
-                </form>
+
+            <div class="user-menu">
+                <ul>
+                    <li><a href="/admin/my-profile" class="nav-item #if(homePage) {active}">My profile</a></li>
+                    <li>
+                        <form action="/logout" method="POST">
+                            <button class="btn logout" type="submit">logout</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </header>
         <main>

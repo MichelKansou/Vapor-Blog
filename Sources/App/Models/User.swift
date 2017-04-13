@@ -20,7 +20,7 @@ struct Authentication {
     static let AccesTokenValidationLength = Date() + (60 * 5) // 5 Minutes later
 }
 
-final class User {
+struct User: Model {
     var id: Node?
     var username: String!
     var password: String!
@@ -28,8 +28,9 @@ final class User {
     var apiKeyID = URandom().secureToken
     var apiKeySecret = URandom().secureToken
     var exists: Bool = false
+}
 
-
+extension User: NodeConvertible {
     init (username: String, password: String) {
         self.id = nil
         self.username = username
@@ -48,9 +49,7 @@ final class User {
         self.username = credentials.username
         self.password = BCrypt.hash(password: credentials.password)
     }
-}
 
-extension User: Model {
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "id": self.id,
@@ -120,6 +119,7 @@ extension User: Auth.User {
         }
     }
 
+
     static func register(credentials: Credentials) throws -> Auth.User {
            var newUser: User
 
@@ -142,7 +142,8 @@ extension User: Auth.User {
 
 
 extension User {
-    func merge(updates: User) {
+    mutating func merge(updates: User) {
+        print(updates.password)
         id = updates.id ?? id
         username = updates.username ?? username
         password = BCrypt.hash(password: updates.password ?? password)
