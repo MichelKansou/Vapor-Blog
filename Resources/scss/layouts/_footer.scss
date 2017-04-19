@@ -10,6 +10,13 @@ footer {
             justify-content: space-around;
             align-content: center;
             padding: 0;
+            .column {
+                display: flex;
+                flex-direction: column;
+                img{
+                    max-width: 50px;
+                }
+            }
         }
         .block {
             display: flex;

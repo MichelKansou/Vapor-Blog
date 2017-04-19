@@ -1,8 +1,9 @@
 main {
 	min-height: 500px;
-	padding: 5em 3em;
+	padding: 5em 6em;
 	justify-content: center;
 	display: flex;
+	align-items: center;
 	align-content: center;
     flex-direction: column;
     .login{
@@ -10,4 +11,10 @@ main {
         padding: 0;
         background-color: #313131;
     }
+}
+
+@media screen and (max-width: 750px) {
+	main {
+		padding: 0;
+	}
 }

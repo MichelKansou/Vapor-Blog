@@ -8,12 +8,7 @@
 </head>
     <body>
         <main class="login-container">
-            <i class="fa fa-home fa-5x" aria-hidden="true" style="
-                color: white;
-                text-align: center;
-                font-size: 8rem;
-                margin-bottom: .3em;
-            "></i>
+
             <div class="form-container">
                 <form id="authForm" action="/login" method="POST">
                     <div class="field">
@@ -23,7 +18,9 @@
                         <span class="input-icon"><i class="fa fa-lock" aria-hidden="true"></i></span><input type="password" placeholder="Password" name="password" required>
                     </div>
                 </form>
-                <input class="btn" type="submit" form="authForm" value="Login"/>
+                <button type="submit" form="authForm" class="btn btn-primary">
+                    <i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+                </button>
             </div>
         </main>
     </body>
