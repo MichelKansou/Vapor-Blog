@@ -31,14 +31,12 @@ final class UserController: ResourceRepresentable {
         Modify an instance (only the fields that are present in the request)
     */
     func update(request: Request, user: User) throws -> ResponseRepresentable {
-        print("update called")
         guard let username = request.data["username"]?.string,
         let password = request.data["password"]?.string else { throw Abort.badRequest }
         var new = user
         var user = user
         new.username = username
         new.password = password
-        print(new)
         user.merge(updates: new)
         try user.save()
         return Response(redirect: "/admin/my-profile")

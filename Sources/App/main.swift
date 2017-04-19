@@ -48,12 +48,10 @@ drop.grouped(CheckUser(), protect).group("admin") { admin in
 
     let userController = UserController()
     userController.addRoutes(to: drop)
-    admin.resource("posts", PostController())
-    admin.get("posts/create") { req in
-        return try drop.view.make("Admin/Post/create", [
-            "request": req
-        ])
-    }
+    let postController = PostController()
+    postController.addRoutes(to: drop)
+
+    admin.resource("posts", postController)
     admin.resource("users", userController)
 
     admin.get("my-profile") { req in

@@ -2,7 +2,7 @@ import Vapor
 import Fluent
 import Foundation
 
-final class Post: Model {
+struct Post: Model {
     var id: Node?
     var exists: Bool = false
     var title: String
@@ -15,7 +15,8 @@ final class Post: Model {
     enum Error: Swift.Error {
         case dateNotSupported
     }
-
+}
+extension Post: NodeConvertible {
     init(title: String, content: String, image: String?, url: String?) {
         self.id = nil
         self.title = title

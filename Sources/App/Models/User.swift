@@ -143,7 +143,6 @@ extension User: Auth.User {
 
 extension User {
     mutating func merge(updates: User) {
-        print(updates.password)
         id = updates.id ?? id
         username = updates.username ?? username
         password = BCrypt.hash(password: updates.password ?? password)
