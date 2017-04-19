@@ -6,6 +6,7 @@
 
 #export("body") {
 	<h1>Posts</h1>
+	<a href="/admin/posts/create" class="btn">New Post</a>
     <div class="posts-container">
         #if(posts) {
             #loop(posts, "post") {

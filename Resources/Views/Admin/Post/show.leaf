@@ -1,16 +1,42 @@
 #extend("Layouts/admin")
 
 #export("head") {
-	<title>My App</title>
+	<title>Post | Edit</title>
 }
 
 #export("body") {
-    <div class="list-container">
+    <div class="container">
         #if(post) {
-            <article class="post">
-                <h2 class="title">#(post.title)</h2>
-                <p class="content">#(post.content)</p>
-            </article>
-        }
+            <h1>Edit</h1>
+            <form id="userForm" action="/admin/posts/#(post.id)/update" method="POST" enctype="multipart/form-data">
+				<div class="field">
+                    <label><b>Title</b></label>
+                    <input type="text" placeholder="Title" name="title" value="#(post.title)" required>
+                </div>
+
+                <div class="field">
+                    <label><b>Content</b></label>
+                    <textarea name="content" placeholder="Enter text here..." required>#(post.content)</textarea>
+                </div>
+				#if(post.image) {
+					<img src="data:image/jpeg;base64,#(post.image)" alt="post-image">
+				} ##else() {
+					<img src="/images/default-post-image.png" alt="post-image">
+				}
+                <div class="field">
+                    <label><b>Image</b></label>
+                    <input type="file" name="image">
+                </div>
+
+                <div class="field">
+                    <label><b>Url</b></label>
+                    <input type="text" placeholder="URL" value="#(post.url)" name="url" required>
+                </div>
+                <button class="btn" type="submit">Save</button>
+            </form>
+			<form id="userForm" action="/admin/posts/#(post.id)/delete" method="POST">
+				<button class="btn" type="submit">Remove</button>
+			</form>
+            }
     </div>
 }

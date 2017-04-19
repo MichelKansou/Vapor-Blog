@@ -15,11 +15,11 @@
 
                 <div class="field">
                     <label><b>Content</b></label>
-                    <textarea name="content" required>Enter text here...</textarea>
+                    <textarea name="content" placeholder="Enter text here..." required></textarea>
                 </div>
                 <div class="field">
                     <label><b>Image</b></label>
-                    <input type="file" name="image" required>
+                    <input type="file" name="image">
                 </div>
                 <div class="field">
                     <label><b>Url</b></label>
