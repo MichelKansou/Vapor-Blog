@@ -42,6 +42,10 @@ drop.get("about") { req in
     ])
 }
 
+drop.get("contact") { req in
+    return try drop.view.make("contact")
+}
+
 let protect = ProtectMiddleware(error: Abort.custom(status: .unauthorized, message: "Unauthorized"))
 
 drop.grouped(CheckUser(), protect).group("admin") { admin in
