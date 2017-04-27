@@ -1,0 +1,14 @@
+.toolbar {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2em;
+    padding: 0 2em;
+    border-color: black;
+    border-bottom: 1px solid;
+    .btn {
+        max-height: 50px;
+        margin-left: auto;
+    }
+}

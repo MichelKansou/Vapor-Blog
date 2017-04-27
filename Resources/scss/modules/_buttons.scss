@@ -1,14 +1,72 @@
-.btn {
+.btn, .label-submit{
 	color: white;
 	border: none;
 	text-decoration: none;
 	cursor: pointer;
-	padding: 10px;
 	font-size: 18px;
-	background-color: #313131;
-    .logout {
-        border-radius: 50%;
-        background-color: white;
-        color: grey;
-    }
+	background-color: #607D8B;
+	&.with-icon {
+		padding: 0;
+		display: flex;
+		align-items: center;
+		i {
+			background-color: #263238;
+			padding: .5em;
+			font-size: 1.5rem;
+		    width: 50px;
+		}
+		span {
+			padding: 0 1em;
+		}
+	}
+	&:hover {
+		background-color: #455A64;
+	}
+	&.danger {
+		background-color: #ff3f47;
+		&:hover {
+			background-color: #d32f2f;
+		}
+	}
+	&.info {
+		background-color: #2196F3;
+		&:hover {
+			background-color: #1976D2;
+		}
+	}
+	&.success {
+		background-color: #4CAF50;
+		&:hover {
+			background-color: #388E3C;
+		}
+	}
+}
+
+.btn {
+	padding: 10px;
+	.logout {
+		border-radius: 50%;
+		background-color: white;
+		color: grey;
+	}
+}
+
+.small-btn {
+	color: #263238;
+    border-bottom: 1px solid;
+    padding-bottom: .7em;
+    cursor: pointer;
+    max-width: 100px;
+    font-size: 18px;
+	&.with-icon {
+	    display: flex;
+		align-items: center;
+		margin-left: auto;
+		i {
+			margin-right: .5em;
+		}
+		span {
+			text-align: right;
+		}
+	}
 }

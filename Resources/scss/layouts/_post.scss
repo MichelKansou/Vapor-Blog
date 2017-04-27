@@ -7,7 +7,7 @@
     justify-content: center;
     .post {
         padding: 1em;
-        text-align: center;
+        // text-align: center;
         border-bottom: 1px solid;
         border-color: #768A92;
         &:last-child {
@@ -17,9 +17,11 @@
         	font-size: 25px;
         	font-weight: 100;
         }
-        .image {
+        .image-container {
+			width: 100%;
+			text-align: center;
 			img {
-                max-width: 220px;
+                max-width: 250px;
             }
 		}
         .content {

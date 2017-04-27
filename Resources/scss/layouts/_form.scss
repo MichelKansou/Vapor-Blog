@@ -1,0 +1,45 @@
+.form-container{
+    background-color: white;
+    padding: 0 2em 2em;
+    .title {
+        margin-bottom: 1em;
+        padding: .5em 0;
+        display: inline-block;
+        margin-top: 0;
+        font-weight: 500;
+        border-bottom: 1px solid;
+    }
+    form {
+        .field {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            margin-bottom: 1em;
+            label{
+                font-size: 1.2rem;
+                font-weight: 300;
+                margin-right: auto;
+            }
+            textarea, input {
+                height: 50px;
+                width: 600px;
+                font-size: small;
+                font-weight: 300;
+                margin-left: 3em;
+            }
+            .input-file {
+                display: none;
+            }
+            img {
+                max-width: 150px;
+            }
+            &.column {
+                flex-direction: column;
+                align-items: baseline;
+            }
+        }
+    }
+    .grid {
+        justify-content: space-between;
+    }
+}

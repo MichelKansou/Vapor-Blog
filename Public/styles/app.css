@@ -8,7 +8,7 @@ body, html {
   font-weight: 100; }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #313131;
   background-color: #ecf0f1;
   position: relative; }
@@ -23,6 +23,9 @@ a {
   color: #ecf0f1;
   text-decoration: none; }
 
+.hidden {
+  display: none; }
+
 header {
   background-color: #444B54;
   color: white;
@@ -31,8 +34,18 @@ header {
   font-size: 1.5rem;
   display: flex;
   align-items: center; }
-  header .admin {
-    justify-content: space-between; }
+  header.admin .user-menu {
+    display: flex;
+    margin-left: auto; }
+    header.admin .user-menu ul {
+      list-style: none; }
+    header.admin .user-menu .btn {
+      padding: 1em;
+      max-height: 60px; }
+      header.admin .user-menu .btn:hover {
+        background-color: #4086cc; }
+      header.admin .user-menu .btn i {
+        font-size: 1.5em; }
   header .blog-logo {
     display: flex;
     justify-content: center;
@@ -78,28 +91,35 @@ main {
 @media screen and (max-width: 750px) {
   main {
     padding: 0; } }
+.grid {
+  display: flex; }
+  .grid .column {
+    flex-direction: column; }
+  .grid .row {
+    flex-direction: row; }
+
 .login-container {
   background-color: #313131;
   height: 100%;
   padding: 0; }
-  .login-container .form-container {
+  .login-container .container {
     display: flex;
     justify-content: center;
     align-items: stretch; }
-    .login-container .form-container .btn {
+    .login-container .container .btn {
       padding: 2em;
       background-color: #374047; }
-    .login-container .form-container .field {
+    .login-container .container .field {
       background-color: white; }
-      .login-container .form-container .field input {
+      .login-container .container .field input {
         border: 0;
         padding: 1em;
         background-color: transparent;
         border-left: 1px solid;
         border-color: #E7E7E7; }
-      .login-container .form-container .field span.input-icon {
+      .login-container .container .field span.input-icon {
         padding: 0.5em; }
-    .login-container .form-container form#authForm {
+    .login-container .container form#authForm {
       display: flex;
       justify-content: space-around;
       flex-direction: column;
@@ -119,7 +139,6 @@ main {
   justify-content: center; }
   .posts-container .post {
     padding: 1em;
-    text-align: center;
     border-bottom: 1px solid;
     border-color: #768A92; }
     .posts-container .post:last-child {
@@ -127,14 +146,52 @@ main {
     .posts-container .post .title {
       font-size: 25px;
       font-weight: 100; }
-    .posts-container .post .image img {
-      max-width: 220px; }
+    .posts-container .post .image-container {
+      width: 100%;
+      text-align: center; }
+      .posts-container .post .image-container img {
+        max-width: 250px; }
     .posts-container .post .content {
       font-size: 16px; }
     .posts-container .post .date {
       text-align: right;
       font-size: 12px;
       color: grey; }
+
+.form-container {
+  background-color: white;
+  padding: 0 2em 2em; }
+  .form-container .title {
+    margin-bottom: 1em;
+    padding: .5em 0;
+    display: inline-block;
+    margin-top: 0;
+    font-weight: 500;
+    border-bottom: 1px solid; }
+  .form-container form .field {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    margin-bottom: 1em; }
+    .form-container form .field label {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-right: auto; }
+    .form-container form .field textarea, .form-container form .field input {
+      height: 50px;
+      width: 600px;
+      font-size: small;
+      font-weight: 300;
+      margin-left: 3em; }
+    .form-container form .field .input-file {
+      display: none; }
+    .form-container form .field img {
+      max-width: 150px; }
+    .form-container form .field.column {
+      flex-direction: column;
+      align-items: baseline; }
+  .form-container .grid {
+    justify-content: space-between; }
 
 footer {
   background-color: #374047;
@@ -157,17 +214,73 @@ footer {
     align-content: center;
     flex-direction: column; }
 
-.btn {
+.btn, .label-submit {
   color: white;
   border: none;
   text-decoration: none;
   cursor: pointer;
-  padding: 10px;
   font-size: 18px;
-  background-color: #313131; }
+  background-color: #607D8B; }
+  .btn.with-icon, .label-submit.with-icon {
+    padding: 0;
+    display: flex;
+    align-items: center; }
+    .btn.with-icon i, .label-submit.with-icon i {
+      background-color: #263238;
+      padding: .5em;
+      font-size: 1.5rem;
+      width: 50px; }
+    .btn.with-icon span, .label-submit.with-icon span {
+      padding: 0 1em; }
+  .btn:hover, .label-submit:hover {
+    background-color: #455A64; }
+  .btn.danger, .label-submit.danger {
+    background-color: #ff3f47; }
+    .btn.danger:hover, .label-submit.danger:hover {
+      background-color: #d32f2f; }
+  .btn.info, .label-submit.info {
+    background-color: #2196F3; }
+    .btn.info:hover, .label-submit.info:hover {
+      background-color: #1976D2; }
+  .btn.success, .label-submit.success {
+    background-color: #4CAF50; }
+    .btn.success:hover, .label-submit.success:hover {
+      background-color: #388E3C; }
+
+.btn {
+  padding: 10px; }
   .btn .logout {
     border-radius: 50%;
     background-color: white;
     color: grey; }
+
+.small-btn {
+  color: #263238;
+  border-bottom: 1px solid;
+  padding-bottom: .7em;
+  cursor: pointer;
+  max-width: 100px;
+  font-size: 18px; }
+  .small-btn.with-icon {
+    display: flex;
+    align-items: center;
+    margin-left: auto; }
+    .small-btn.with-icon i {
+      margin-right: .5em; }
+    .small-btn.with-icon span {
+      text-align: right; }
+
+.toolbar {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 0 2em;
+  border-color: black;
+  border-bottom: 1px solid; }
+  .toolbar .btn {
+    max-height: 50px;
+    margin-left: auto; }
 
 /*# sourceMappingURL=app.css.map */

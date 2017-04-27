@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-    #import("head")
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/app.css">
-    <link rel="stylesheet" href="/styles/font-awesome.min.css">
-</head>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/styles/app.css">
+        <link rel="stylesheet" href="/styles/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    </head>
     <body>
         <header class="admin">
+            <a class="blog-logo" href="/">
+                <img src="/images/E13_white.svg"alt="blog-logo"></a>
             <nav>
                 <ul>
                     <li><a href="/" class="nav-item #if(homePage) {active}">Home</a></li>
-                    <li><a href="posts #if(postPage) {active}">Posts</a></li>
+                    <li><a href="posts" class="nav-item #if(postsPage) {active}">Posts</a></li>
                 </ul>
             </nav>
 
             <div class="user-menu">
-                <ul>
-                    <li><a href="/admin/my-profile" class="nav-item #if(homePage) {active}">My profile</a></li>
-                    <li>
-                        <form action="/logout" method="POST">
-                            <button class="btn logout" type="submit">logout</button>
-                        </form>
-                    </li>
-                </ul>
+                <a href="/admin/my-profile" class="btn"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <form action="/logout" method="POST">
+                    <button class="btn logout" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </form>
             </div>
         </header>
         <main>

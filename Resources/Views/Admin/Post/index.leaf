@@ -5,19 +5,23 @@
 }
 
 #export("body") {
-	<h1>Posts</h1>
-	<a href="/admin/posts/create" class="btn">New Post</a>
+	<div class="toolbar">
+		<h1>Posts</h1>
+		<a href="/admin/posts/create" class="btn with-icon"><i class="fa fa-plus" aria-hidden="true"></i><span>New Post</span></a>
+	</div>
     <div class="posts-container">
         #if(posts) {
             #loop(posts, "post") {
                 <article class="post">
+					<a href="#(post.id)" class="small-btn with-icon"><i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span></a>
                     <h2 class="title">#(post.title)</h2>
 					#if(post.image) {
-						<a class="image" href="#(post.url)"><img src="data:image/jpeg;base64,#(post.image)" alt="post-image"></a>
+						<div class="image-container"><img src="data:image/jpeg;base64,#(post.image)" alt="post-image"></div>
 					} ##else() {
-						<a class="image" href="#(post.url)"><img src="/images/default-post-image.png" alt="post-image"></a>
+						<div class="image-container"><img src="/images/default-post-image.png" alt="post-image"></div>
 					}
                     <p class="content">#(post.content)</p>
+					<a class="btn info" href="#(post.url)">Learn more</a>
 					<p class="date">#(post.created_at)</p>
                 </article>
             }

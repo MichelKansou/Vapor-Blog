@@ -6,8 +6,24 @@ header {
     font-size: 1.5rem;
     display: flex;
     align-items: center;
-    .admin {
-        justify-content: space-between;
+    &.admin {
+		.user-menu{
+			display: flex;
+			margin-left: auto;
+			ul {
+				list-style: none;
+			}
+			.btn {
+				padding: 1em;
+				max-height: 60px;
+				&:hover {
+					background-color: #4086cc;
+				}
+				i {
+					font-size: 1.5em;
+				}
+			}
+		}
     }
     .blog-logo {
 		display: flex;

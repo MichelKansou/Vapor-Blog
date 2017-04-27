@@ -1,0 +1,11 @@
+#extend("Layouts/base")
+
+#export("head") {
+	<title>My App - Contact</title>
+}
+
+#export("body") {
+    <div class="about-container">
+		This is contact page
+    </div>
+}

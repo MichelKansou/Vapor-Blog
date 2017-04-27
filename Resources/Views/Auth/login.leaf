@@ -8,8 +8,7 @@
 </head>
     <body>
         <main class="login-container">
-
-            <div class="form-container">
+            <div class="container">
                 <form id="authForm" action="/login" method="POST">
                     <div class="field">
                         <span class="input-icon"><i class="fa fa-user" aria-hidden="true"></i></span><input type="text" placeholder="Username" name="username" required>
