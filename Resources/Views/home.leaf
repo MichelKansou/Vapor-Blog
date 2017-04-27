@@ -5,20 +5,21 @@
 }
 
 #export("body") {
-    <div class="posts-container">
+	<div class="posts-container">
 		#if(posts) {
-            #loop(posts, "post") {
-                <article class="post">
+			#loop(posts, "post") {
+				<article class="post">
 					<h2 class="title">#(post.title)</h2>
 					#if(post.image) {
-						<a class="image" href="#(post.url)"><img src="data:image/jpeg;base64,#(post.image)" alt="post-image"></a>
+						<div class="image-container"><img src="data:image/jpeg;base64,#(post.image)" alt="post-image"></div>
 					} ##else() {
-						<a class="image" href="#(post.url)"><img src="/images/default-post-image.png" alt="post-image"></a>
+						<div class="image-container"><img src="/images/default-post-image.png" alt="post-image"></div>
 					}
-                    <p class="content">#(post.content)</p>
+					<p class="content">#(post.content)</p>
+					<a class="btn info" href="#(post.url)">Learn more</a>
 					<p class="date">#(post.created_at)</p>
-                </article>
-            }
-        }
-    </div>
+				</article>
+			}
+		}
+	</div>
 }
